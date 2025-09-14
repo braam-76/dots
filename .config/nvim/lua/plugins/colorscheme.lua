@@ -1,6 +1,6 @@
 return {
-  "jnurmine/Zenburn",
+  "thesimonho/kanagawa-paper.nvim",
   config = function()
-    vim.cmd.colorscheme("zenburn")
+    vim.cmd.colorscheme("kanagawa-paper")
   end
 }
