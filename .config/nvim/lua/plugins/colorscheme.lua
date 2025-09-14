@@ -1,15 +1,6 @@
 return {
-  "catppuccin/nvim",
-  name = "catppuccin",
-  priority = 1000,
+  "jnurmine/Zenburn",
   config = function()
-    vim.cmd.colorscheme("catppuccin-macchiato")
+    vim.cmd.colorscheme("zenburn")
   end
 }
-
--- return {
---   "ntk148v/vim-horizon",
---   config = function()
---     vim.cmd.colorscheme("horizon")
---   end
--- }
