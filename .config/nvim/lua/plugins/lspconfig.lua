@@ -1,75 +1,45 @@
 return {
   {
-    "mason-org/mason.nvim",
-    config = function()
-      require("mason").setup({})
-    end,
-  },
-  {
-    "mason-org/mason-lspconfig.nvim",
+    "saghen/blink.cmp",
+    dependencies = { "rafamadriz/friendly-snippets" },
+    version = "1.*",
     opts = {
-      automatic_enable = false,
-      ensure_installed = {
-        "lua_ls",
-        "ts_ls",
-        "clangd",
-        "gopls",
+      keymap = { preset = "default" },
+
+      appearance = {
+        nerd_font_variant = "mono",
       },
+
+      -- (Default) Only show the documentation popup when manually triggered
+      completion = { documentation = { auto_show = false } },
+
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
+
+      fuzzy = { implementation = "prefer_rust_with_warning" },
     },
   },
   {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "williamboman/mason.nvim",        -- For installing LSP servers
-      "williamboman/mason-lspconfig.nvim", -- For configuring LSP servers
+    'neovim/nvim-lspconfig',
+    dependencies = { 'saghen/blink.cmp' },
+
+    -- example using `opts` for defining servers
+    opts = {
+      servers = {
+        lua_ls = {},
+        clangd = {},
+        zls = {},
+      }
     },
-    config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-            format = {
-              enable = true,
-              -- Put format options here
-              -- NOTE: the value should be String!
-              defaultConfig = {
-                indent_style = "space",
-                indent_size = "2",
-              },
-            },
-            workspace = {
-              library = { vim.env.VIMRUNTIME },
-              checkThirdParty = false,
-            },
-          },
-        },
-      })
-      lspconfig.ts_ls.setup({ capabilities = capabilities })
-      lspconfig.clangd.setup({ capabilities = capabilities })
-      lspconfig.gopls.setup({ capabilities = capabilities })
-      vim.keymap.set(
-        "n",
-        "<leader>lh",
-        vim.lsp.buf.hover,
-        { desc = "[l]sp: get info on [h]over (nvim-lspconfig)" }
-      )
-      vim.keymap.set(
-        "n",
-        "<leader>ld",
-        vim.lsp.buf.definition,
-        { desc = "[l]sp: goto [d]efinition (nvim-lspconfig)" }
-      )
-      vim.keymap.set(
-        "n",
-        "<leader>la",
-        vim.lsp.buf.code_action,
-        { desc = "[l]sp: code [a]ction (nvim-lspconfig)" }
-      )
-    end,
-  },
+    config = function(_, opts)
+      local lspconfig = require('lspconfig')
+      for server, config in pairs(opts.servers) do
+        -- passing config.capabilities to blink.cmp merges with the capabilities in your
+        -- `opts[server].capabilities, if you've defined it
+        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+        lspconfig[server].setup(config)
+      end
+    end
+  }
 }
