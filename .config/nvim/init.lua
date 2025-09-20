@@ -8,6 +8,7 @@ vim.o.showmode = false
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.signcolumn = 'yes'
+vim.o.winborder = 'rounded'
 
 vim.o.expandtab = true
 vim.o.tabstop = 2
