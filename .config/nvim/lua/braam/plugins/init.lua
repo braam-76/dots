@@ -1,0 +1,6 @@
+require "braam/plugins/colorscheme"
+require "braam/plugins/lspconfig"
+require "braam/plugins/neogit"
+require "braam/plugins/mini"
+require "braam/plugins/flash"
+require "braam/plugins/yazi"
