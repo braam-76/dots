@@ -50,12 +50,12 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
-exec --no-startup-id feh --bg-scale ~/Downloads/futuristic-blue-3840x2160-22185.jpg
+exec --no-startup-id feh --bg-scale ~/Downloads/8f4qcttvmls41-1193230482.png
 
-exec --no-startup-id emacs --daemon
+# exec --no-startup-id emacs --daemon
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec wezterm
 
 # kill focused window
 bindsym $mod+q kill
