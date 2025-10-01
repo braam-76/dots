@@ -11,7 +11,7 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'bufls', 'serve' },
-  filetypes = { 'proto' },
-  root_markers = { 'buf.work.yaml', '.git' },
+  cmd = { "bufls", "serve" },
+  filetypes = { "proto" },
+  root_markers = { "buf.work.yaml", ".git" },
 }

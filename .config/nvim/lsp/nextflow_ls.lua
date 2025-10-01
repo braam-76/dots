@@ -25,13 +25,13 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'java', '-jar', 'nextflow-language-server-all.jar' },
-  filetypes = { 'nextflow' },
-  root_markers = { 'nextflow.config', '.git' },
+  cmd = { "java", "-jar", "nextflow-language-server-all.jar" },
+  filetypes = { "nextflow" },
+  root_markers = { "nextflow.config", ".git" },
   settings = {
     nextflow = {
       files = {
-        exclude = { '.git', '.nf-test', 'work' },
+        exclude = { ".git", ".nf-test", "work" },
       },
     },
   },

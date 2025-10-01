@@ -7,9 +7,9 @@
 ---@type vim.lsp.Config
 return {
   cmd = {
-    'janet-lsp',
-    '--stdio',
+    "janet-lsp",
+    "--stdio",
   },
-  filetypes = { 'janet' },
-  root_markers = { 'project.janet', '.git' },
+  filetypes = { "janet" },
+  root_markers = { "project.janet", ".git" },
 }

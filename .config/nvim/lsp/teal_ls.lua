@@ -15,10 +15,10 @@
 ---@type vim.lsp.Config
 return {
   cmd = {
-    'teal-language-server',
+    "teal-language-server",
   },
   filetypes = {
-    'teal',
+    "teal",
   },
-  root_markers = { 'tlconfig.lua' },
+  root_markers = { "tlconfig.lua" },
 }

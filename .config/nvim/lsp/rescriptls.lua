@@ -36,9 +36,9 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'rescript-language-server', '--stdio' },
-  filetypes = { 'rescript' },
-  root_markers = { 'bsconfig.json', 'rescript.json', '.git' },
+  cmd = { "rescript-language-server", "--stdio" },
+  filetypes = { "rescript" },
+  root_markers = { "bsconfig.json", "rescript.json", ".git" },
   settings = {},
   init_options = {
     extensionConfiguration = {

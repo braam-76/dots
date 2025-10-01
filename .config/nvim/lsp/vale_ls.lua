@@ -6,7 +6,7 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'vale-ls' },
-  filetypes = { 'markdown', 'text', 'tex', 'rst' },
-  root_markers = { '.vale.ini' },
+  cmd = { "vale-ls" },
+  filetypes = { "markdown", "text", "tex", "rst" },
+  root_markers = { ".vale.ini" },
 }

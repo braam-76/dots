@@ -10,8 +10,8 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'bqls' },
-  filetypes = { 'sql' },
-  root_markers = { '.git' },
+  cmd = { "bqls" },
+  filetypes = { "sql" },
+  root_markers = { ".git" },
   settings = {},
 }

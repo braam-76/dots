@@ -6,9 +6,9 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'postgrestools', 'lsp-proxy' },
+  cmd = { "postgrestools", "lsp-proxy" },
   filetypes = {
-    'sql',
+    "sql",
   },
-  root_markers = { 'postgrestools.jsonc' },
+  root_markers = { "postgrestools.jsonc" },
 }

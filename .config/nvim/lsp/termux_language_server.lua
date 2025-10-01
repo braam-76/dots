@@ -6,7 +6,7 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'termux-language-server' },
-  filetypes = { 'PKGBUILD' },
-  root_markers = { '.git' },
+  cmd = { "termux-language-server" },
+  filetypes = { "PKGBUILD" },
+  root_markers = { ".git" },
 }

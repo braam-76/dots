@@ -7,13 +7,13 @@
 --- npm install -g @astrojs/language-server
 --- ```
 
-local util = require 'lspconfig.util'
+local util = require("lspconfig.util")
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'astro-ls', '--stdio' },
-  filetypes = { 'astro' },
-  root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
+  cmd = { "astro-ls", "--stdio" },
+  filetypes = { "astro" },
+  root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
   init_options = {
     typescript = {},
   },

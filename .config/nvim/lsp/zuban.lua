@@ -6,14 +6,14 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'zuban', 'server' },
-  filetypes = { 'python' },
+  cmd = { "zuban", "server" },
+  filetypes = { "python" },
   root_markers = {
-    'pyproject.toml',
-    'setup.py',
-    'setup.cfg',
-    'requirements.txt',
-    'Pipfile',
-    '.git',
+    "pyproject.toml",
+    "setup.py",
+    "setup.cfg",
+    "requirements.txt",
+    "Pipfile",
+    ".git",
   },
 }

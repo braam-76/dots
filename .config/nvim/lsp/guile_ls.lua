@@ -13,9 +13,9 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'guile-lsp-server' },
+  cmd = { "guile-lsp-server" },
   filetypes = {
-    'scheme.guile',
+    "scheme.guile",
   },
-  root_markers = { 'guix.scm', '.git' },
+  root_markers = { "guix.scm", ".git" },
 }

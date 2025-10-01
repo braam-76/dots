@@ -9,12 +9,12 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'prisma-language-server', '--stdio' },
-  filetypes = { 'prisma' },
+  cmd = { "prisma-language-server", "--stdio" },
+  filetypes = { "prisma" },
   settings = {
     prisma = {
-      prismaFmtBinPath = '',
+      prismaFmtBinPath = "",
     },
   },
-  root_markers = { '.git', 'package.json' },
+  root_markers = { ".git", "package.json" },
 }

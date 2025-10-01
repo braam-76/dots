@@ -14,11 +14,11 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'metals' },
-  filetypes = { 'scala' },
-  root_markers = { 'build.sbt', 'build.sc', 'build.gradle', 'pom.xml' },
+  cmd = { "metals" },
+  filetypes = { "scala" },
+  root_markers = { "build.sbt", "build.sc", "build.gradle", "pom.xml" },
   init_options = {
-    statusBarProvider = 'show-message',
+    statusBarProvider = "show-message",
     isHttpEnabled = true,
     compilerOptions = {
       snippetAutoIndent = false,

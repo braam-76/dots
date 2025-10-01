@@ -11,16 +11,16 @@
 ---@type vim.lsp.Config
 return {
   cmd = {
-    'shopify',
-    'theme',
-    'language-server',
+    "shopify",
+    "theme",
+    "language-server",
   },
-  filetypes = { 'liquid' },
+  filetypes = { "liquid" },
   root_markers = {
-    '.shopifyignore',
-    '.theme-check.yml',
-    '.theme-check.yaml',
-    'shopify.theme.toml',
+    ".shopifyignore",
+    ".theme-check.yml",
+    ".theme-check.yaml",
+    "shopify.theme.toml",
   },
   settings = {},
 }

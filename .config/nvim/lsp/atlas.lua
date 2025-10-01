@@ -58,9 +58,9 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { 'atlas', 'tool', 'lsp', '--stdio' },
+  cmd = { "atlas", "tool", "lsp", "--stdio" },
   filetypes = {
-    'atlas-*',
+    "atlas-*",
   },
-  root_markers = { 'atlas.hcl' },
+  root_markers = { "atlas.hcl" },
 }

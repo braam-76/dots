@@ -15,7 +15,7 @@ config.enable_tab_bar = false
 
 function scheme_for_appearance(appearance)
   if appearance:find 'Dark' then
-    return 'modus-vivendi'
+    return 'kanagawa (Gogh)'
   else
     return 'modus-operandi'
   end

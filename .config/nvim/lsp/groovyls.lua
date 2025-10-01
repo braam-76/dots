@@ -21,10 +21,10 @@
 ---@type vim.lsp.Config
 return {
   cmd = {
-    'java',
-    '-jar',
-    'groovy-language-server-all.jar',
+    "java",
+    "-jar",
+    "groovy-language-server-all.jar",
   },
-  filetypes = { 'groovy' },
-  root_markers = { 'Jenkinsfile', '.git' },
+  filetypes = { "groovy" },
+  root_markers = { "Jenkinsfile", ".git" },
 }
