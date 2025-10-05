@@ -56,9 +56,7 @@ return {
     "xhtml",
   },
   root_markers = { ".git" },
-  get_language_id = function(_, filetype)
-    return language_id_mapping[filetype] or filetype
-  end,
+  get_language_id = function(_, filetype) return language_id_mapping[filetype] or filetype end,
   settings = {
     ltex = {
       enabled = {

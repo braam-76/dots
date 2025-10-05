@@ -2,9 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
 
-vim.schedule(function()
-  vim.o.clipboard = "unnamedplus"
-end)
+vim.schedule(function() vim.o.clipboard = "unnamedplus" end)
 
 vim.o.relativenumber = true
 vim.o.mouse = "a"
@@ -35,4 +33,4 @@ vim.keymap.set("n", "<C-Up>", "<C-w><C-k>", { desc = "Move focus to the upper wi
 vim.keymap.set("n", "<leader>so", ":update<CR> :source<CR>")
 
 vim.env.PATH = vim.env.PATH .. ":/home/linuxbrew/.linuxbrew/bin"
-require("braam/plugins")
+require "braam/plugins"

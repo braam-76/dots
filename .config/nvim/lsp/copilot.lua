@@ -41,9 +41,7 @@ local function sign_in(bufnr, client)
               vim.notify(err.message, vim.log.levels.ERROR)
               return
             end
-            if cmd_result.status == "OK" then
-              vim.notify("Signed in as " .. cmd_result.user .. ".")
-            end
+            if cmd_result.status == "OK" then vim.notify("Signed in as " .. cmd_result.user .. ".") end
           end)
         end
       end
@@ -68,9 +66,7 @@ local function sign_out(_, client)
         vim.notify(err.message, vim.log.levels.ERROR)
         return
       end
-      if result.status == "NotSignedIn" then
-        vim.notify("Not signed in.")
-      end
+      if result.status == "NotSignedIn" then vim.notify "Not signed in." end
     end
   )
 end
@@ -98,11 +94,17 @@ return {
     },
   },
   on_attach = function(client, bufnr)
-    vim.api.nvim_buf_create_user_command(bufnr, "LspCopilotSignIn", function()
-      sign_in(bufnr, client)
-    end, { desc = "Sign in Copilot with GitHub" })
-    vim.api.nvim_buf_create_user_command(bufnr, "LspCopilotSignOut", function()
-      sign_out(bufnr, client)
-    end, { desc = "Sign out Copilot with GitHub" })
+    vim.api.nvim_buf_create_user_command(
+      bufnr,
+      "LspCopilotSignIn",
+      function() sign_in(bufnr, client) end,
+      { desc = "Sign in Copilot with GitHub" }
+    )
+    vim.api.nvim_buf_create_user_command(
+      bufnr,
+      "LspCopilotSignOut",
+      function() sign_out(bufnr, client) end,
+      { desc = "Sign out Copilot with GitHub" }
+    )
   end,
 }

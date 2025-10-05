@@ -4,7 +4,7 @@
 ---
 --- solc is the native language server for the Solidity language.
 
-local util = require("lspconfig.util")
+local util = require "lspconfig.util"
 
 ---@type vim.lsp.Config
 return {

@@ -7,7 +7,7 @@
 --- NOTE: AutoHotkey is Windows-only.
 
 local function get_autohotkey_path()
-  local path = vim.fn.exepath("autohotkey.exe")
+  local path = vim.fn.exepath "autohotkey.exe"
   return #path > 0 and path or ""
 end
 

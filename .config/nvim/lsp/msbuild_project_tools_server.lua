@@ -33,7 +33,7 @@
 --- ```
 
 local host_dll_name = "MSBuildProjectTools.LanguageServer.Host.dll"
-local util = require("lspconfig.util")
+local util = require "lspconfig.util"
 
 ---@type vim.lsp.Config
 return {

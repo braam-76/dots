@@ -1,7 +1,7 @@
-vim.pack.add({
+vim.pack.add {
   { src = "https://github.com/rebelot/kanagawa.nvim" },
   { src = "https://github.com/vague2k/vague.nvim" },
   { src = "https://github.com/miikanissi/modus-themes.nvim" },
-})
+}
 
-vim.cmd.colorscheme("kanagawa")
+vim.cmd.colorscheme "kanagawa"

@@ -26,9 +26,9 @@
 local root_files = { "Project.toml", "JuliaProject.toml" }
 
 local function activate_env(path)
-  assert(vim.fn.has("nvim-0.10") == 1, "requires Nvim 0.10 or newer")
+  assert(vim.fn.has "nvim-0.10" == 1, "requires Nvim 0.10 or newer")
   local bufnr = vim.api.nvim_get_current_buf()
-  local julials_clients = vim.lsp.get_clients({ bufnr = bufnr, name = "julials" })
+  local julials_clients = vim.lsp.get_clients { bufnr = bufnr, name = "julials" }
   assert(
     #julials_clients > 0,
     "method julia/activateenvironment is not supported by any servers active on the current buffer"
@@ -58,17 +58,20 @@ local function activate_env(path)
     _activate_env(path)
   else
     local depot_paths = vim.env.JULIA_DEPOT_PATH
-        and vim.split(vim.env.JULIA_DEPOT_PATH, vim.fn.has("win32") == 1 and ";" or ":")
-      or { vim.fn.expand("~/.julia") }
+        and vim.split(vim.env.JULIA_DEPOT_PATH, vim.fn.has "win32" == 1 and ";" or ":")
+      or { vim.fn.expand "~/.julia" }
     local environments = {}
     vim.list_extend(environments, vim.fs.find(root_files, { type = "file", upward = true, limit = math.huge }))
     for _, depot_path in ipairs(depot_paths) do
       local depot_env = vim.fs.joinpath(vim.fs.normalize(depot_path), "environments")
       vim.list_extend(
         environments,
-        vim.fs.find(function(name, env_path)
-          return vim.tbl_contains(root_files, name) and string.sub(env_path, #depot_env + 1):match("^/[^/]*$")
-        end, { path = depot_env, type = "file", limit = math.huge })
+        vim.fs.find(
+          function(name, env_path)
+            return vim.tbl_contains(root_files, name) and string.sub(env_path, #depot_env + 1):match "^/[^/]*$"
+          end,
+          { path = depot_env, type = "file", limit = math.huge }
+        )
       )
     end
     environments = vim.tbl_map(vim.fs.dirname, environments)

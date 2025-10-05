@@ -15,7 +15,7 @@
 --- export FPCTARGETCPU='x86_64'          # Target CPU for cross compiling.
 --- ```
 
-local util = require("lspconfig.util")
+local util = require "lspconfig.util"
 
 ---@type vim.lsp.Config
 return {

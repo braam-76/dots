@@ -15,11 +15,9 @@
 ---@param bufnr integer
 ---@return fun():nil run_tinymist_command, string cmd_name, string cmd_desc
 local function create_tinymist_command(command_name, client, bufnr)
-  local export_type = command_name:match("tinymist%.export(%w+)")
-  local info_type = command_name:match("tinymist%.(%w+)")
-  if info_type and info_type:match("^get") then
-    info_type = info_type:gsub("^get", "Get")
-  end
+  local export_type = command_name:match "tinymist%.export(%w+)"
+  local info_type = command_name:match "tinymist%.(%w+)"
+  if info_type and info_type:match "^get" then info_type = info_type:gsub("^get", "Get") end
   local cmd_display = export_type or info_type
   ---@return nil
   local function run_tinymist_command()
@@ -27,9 +25,7 @@ local function create_tinymist_command(command_name, client, bufnr)
     local title_str = export_type and ("Export " .. cmd_display) or cmd_display
     ---@type lsp.Handler
     local function handler(err, res)
-      if err then
-        return vim.notify(err.code .. ": " .. err.message, vim.log.levels.ERROR)
-      end
+      if err then return vim.notify(err.code .. ": " .. err.message, vim.log.levels.ERROR) end
       -- If exporting, show the string result; else, show the table for inspection
       vim.notify(export_type and res or vim.inspect(res), vim.log.levels.INFO)
     end
@@ -51,7 +47,7 @@ return {
   filetypes = { "typst" },
   root_markers = { ".git" },
   on_attach = function(client, bufnr)
-    for _, command in ipairs({
+    for _, command in ipairs {
       "tinymist.exportSvg",
       "tinymist.exportPng",
       "tinymist.exportPdf",
@@ -64,7 +60,7 @@ return {
       "tinymist.getDocumentTrace",
       "tinymist.getWorkspaceLabels",
       "tinymist.getDocumentMetrics",
-    }) do
+    } do
       local cmd_func, cmd_name, cmd_desc = create_tinymist_command(command, client, bufnr)
       vim.api.nvim_buf_create_user_command(bufnr, "Lsp" .. cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
     end

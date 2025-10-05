@@ -45,9 +45,7 @@ return {
       "-Ddebug.completion.statistics=" .. tostring(config.apex_enable_completion_statistics or false),
       "-Dlwc.typegeneration.disabled=true",
     }
-    if config.apex_jvm_max_heap then
-      table.insert(local_cmd, "-Xmx" .. config.apex_jvm_max_heap)
-    end
+    if config.apex_jvm_max_heap then table.insert(local_cmd, "-Xmx" .. config.apex_jvm_max_heap) end
     table.insert(local_cmd, "apex.jorje.lsp.ApexLanguageServerLauncher")
 
     return vim.lsp.rpc.start(local_cmd, dispatchers)

@@ -32,16 +32,12 @@
 ---       vim.lsp.config('jdtls', { cmd = { 'jdtls' } })
 ---     ```
 
-local function get_jdtls_cache_dir()
-  return vim.fn.stdpath("cache") .. "/jdtls"
-end
+local function get_jdtls_cache_dir() return vim.fn.stdpath "cache" .. "/jdtls" end
 
-local function get_jdtls_workspace_dir()
-  return get_jdtls_cache_dir() .. "/workspace"
-end
+local function get_jdtls_workspace_dir() return get_jdtls_cache_dir() .. "/workspace" end
 
 local function get_jdtls_jvm_args()
-  local env = os.getenv("JDTLS_JVM_ARGS")
+  local env = os.getenv "JDTLS_JVM_ARGS"
   local args = {}
   for a in string.gmatch((env or ""), "%S+") do
     local arg = string.format("--jvm-arg=%s", a)
@@ -80,9 +76,7 @@ return {
 
     if config.root_markers then
       local root_dir = vim.fs.root(0, config.root_markers)
-      if root_dir then
-        data_dir = data_dir .. "/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
-      end
+      if root_dir then data_dir = data_dir .. "/" .. vim.fn.fnamemodify(root_dir, ":p:h:t") end
     end
 
     local config_cmd = {
@@ -99,7 +93,7 @@ return {
     })
   end,
   filetypes = { "java" },
-  root_markers = vim.fn.has("nvim-0.11.3") == 1 and { root_markers1, root_markers2 }
+  root_markers = vim.fn.has "nvim-0.11.3" == 1 and { root_markers1, root_markers2 }
     or vim.list_extend(root_markers1, root_markers2),
   init_options = {},
 }

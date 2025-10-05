@@ -4,7 +4,7 @@
 ---
 --- Language Server for Agda.
 
-local util = require("lspconfig.util")
+local util = require "lspconfig.util"
 
 ---@type vim.lsp.Config
 return {

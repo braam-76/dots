@@ -24,16 +24,12 @@ return {
     -- check if inside lean stdlib
     local stdlib_dir
     do
-      local _, endpos = fname:find("/lean/library")
-      if endpos then
-        stdlib_dir = fname:sub(1, endpos)
-      end
+      local _, endpos = fname:find "/lean/library"
+      if endpos then stdlib_dir = fname:sub(1, endpos) end
     end
     if not stdlib_dir then
-      local _, endpos = fname:find("/lib/lean")
-      if endpos then
-        stdlib_dir = fname:sub(1, endpos)
-      end
+      local _, endpos = fname:find "/lib/lean"
+      if endpos then stdlib_dir = fname:sub(1, endpos) end
     end
 
     on_dir(

@@ -4,7 +4,7 @@
 ---
 --- Language server for Swift and C/C++/Objective-C.
 
-local util = require("lspconfig.util")
+local util = require "lspconfig.util"
 
 ---@type vim.lsp.Config
 return {
@@ -13,7 +13,7 @@ return {
   root_dir = function(bufnr, on_dir)
     local filename = vim.api.nvim_buf_get_name(bufnr)
     on_dir(
-      util.root_pattern("buildServer.json")(filename)
+      util.root_pattern "buildServer.json"(filename)
         or util.root_pattern("*.xcodeproj", "*.xcworkspace")(filename)
         -- better to keep it at the end, because some modularized apps contain multiple Package.swift files
         or util.root_pattern("compile_commands.json", "Package.swift")(filename)

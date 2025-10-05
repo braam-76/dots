@@ -40,9 +40,7 @@ local function on_init_project(client, project_files)
   vim.notify("Initializing: projects", vim.log.levels.TRACE, { title = "roslyn_ls" })
   ---@diagnostic disable-next-line: param-type-mismatch
   client:notify("project/open", {
-    projects = vim.tbl_map(function(file)
-      return vim.uri_from_fname(file)
-    end, project_files),
+    projects = vim.tbl_map(function(file) return vim.uri_from_fname(file) end, project_files),
   })
 end
 
@@ -74,9 +72,7 @@ local function roslyn_handlers()
 
       ---@diagnostic disable-next-line: param-type-mismatch
       client:request("workspace/_roslyn_restore", result, function(err, response)
-        if err then
-          vim.notify(err.message, vim.log.levels.ERROR, { title = "roslyn_ls" })
-        end
+        if err then vim.notify(err.message, vim.log.levels.ERROR, { title = "roslyn_ls" }) end
         if response then
           for _, v in ipairs(response) do
             vim.notify(v.message, vim.log.levels.INFO, { title = "roslyn_ls" })
@@ -140,22 +136,16 @@ return {
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     -- don't try to find sln or csproj for files from libraries
     -- outside of the project
-    if not bufname:match("^" .. fs.joinpath("/tmp/MetadataAsSource/")) then
+    if not bufname:match("^" .. fs.joinpath "/tmp/MetadataAsSource/") then
       -- try find solutions root first
-      local root_dir = fs.root(bufnr, function(fname, _)
-        return fname:match("%.sln[x]?$") ~= nil
-      end)
+      local root_dir = fs.root(bufnr, function(fname, _) return fname:match "%.sln[x]?$" ~= nil end)
 
       if not root_dir then
         -- try find projects root
-        root_dir = fs.root(bufnr, function(fname, _)
-          return fname:match("%.csproj$") ~= nil
-        end)
+        root_dir = fs.root(bufnr, function(fname, _) return fname:match "%.csproj$" ~= nil end)
       end
 
-      if root_dir then
-        cb(root_dir)
-      end
+      if root_dir then cb(root_dir) end
     end
   end,
   on_init = {
@@ -181,16 +171,12 @@ return {
 
   on_attach = function(client, bufnr)
     -- avoid duplicate autocmds for same buffer
-    if vim.api.nvim_get_autocmds({ buffer = bufnr, group = group })[1] then
-      return
-    end
+    if vim.api.nvim_get_autocmds({ buffer = bufnr, group = group })[1] then return end
 
     vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
       group = group,
       buffer = bufnr,
-      callback = function()
-        refresh_diagnostics(client)
-      end,
+      callback = function() refresh_diagnostics(client) end,
       desc = "roslyn_ls: refresh diagnostics",
     })
   end,

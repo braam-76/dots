@@ -60,7 +60,7 @@ return {
     -- manager lock file.
     local root_markers = { "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock" }
     -- Give the root markers equal priority by wrapping them in a table
-    root_markers = vim.fn.has("nvim-0.11.3") == 1 and { root_markers, { ".git" } }
+    root_markers = vim.fn.has "nvim-0.11.3" == 1 and { root_markers, { ".git" } }
       or vim.list_extend(root_markers, { ".git" })
     -- We fallback to the current working directory if no project root is found
     local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
@@ -105,22 +105,23 @@ return {
         },
       }, client.offset_encoding)
 
-      vim.cmd("botright copen")
+      vim.cmd "botright copen"
     end,
   },
   on_attach = function(client, bufnr)
     -- ts_ls provides `source.*` code actions that apply to the whole file. These only appear in
     -- `vim.lsp.buf.code_action()` if specified in `context.only`.
     vim.api.nvim_buf_create_user_command(bufnr, "LspTypescriptSourceAction", function()
-      local source_actions = vim.tbl_filter(function(action)
-        return vim.startswith(action, "source.")
-      end, client.server_capabilities.codeActionProvider.codeActionKinds)
+      local source_actions = vim.tbl_filter(
+        function(action) return vim.startswith(action, "source.") end,
+        client.server_capabilities.codeActionProvider.codeActionKinds
+      )
 
-      vim.lsp.buf.code_action({
+      vim.lsp.buf.code_action {
         context = {
           only = source_actions,
         },
-      })
+      }
     end, {})
   end,
 }

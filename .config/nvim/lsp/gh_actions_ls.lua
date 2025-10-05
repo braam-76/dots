@@ -32,13 +32,11 @@ return {
   end,
   handlers = {
     ["actions/readFile"] = function(_, result)
-      if type(result.path) ~= "string" then
-        return nil, nil
-      end
+      if type(result.path) ~= "string" then return nil, nil end
       local file_path = vim.uri_to_fname(result.path)
       if vim.fn.filereadable(file_path) == 1 then
         local f = assert(io.open(file_path, "r"))
-        local text = f:read("*a")
+        local text = f:read "*a"
         f:close()
 
         return text, nil

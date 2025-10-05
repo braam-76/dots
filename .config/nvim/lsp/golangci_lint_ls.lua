@@ -35,8 +35,8 @@ return {
     local v1, v2 = false, false
     -- PERF: `golangci-lint version` is very slow (about 0.1 sec) so let's find
     -- version using `go version -m $(which golangci-lint) | grep '^\smod'`.
-    if vim.fn.executable("go") == 1 then
-      local exe = vim.fn.exepath("golangci-lint")
+    if vim.fn.executable "go" == 1 then
+      local exe = vim.fn.exepath "golangci-lint"
       local version = vim.system({ "go", "version", "-m", exe }):wait()
       v1 = string.match(version.stdout, "\tmod\tgithub.com/golangci/golangci%-lint\t")
       v2 = string.match(version.stdout, "\tmod\tgithub.com/golangci/golangci%-lint/v2\t")
@@ -45,8 +45,6 @@ return {
       local version = vim.system({ "golangci-lint", "version" }):wait()
       v1 = string.match(version.stdout, "version v?1%.")
     end
-    if v1 then
-      config.init_options.command = { "golangci-lint", "run", "--out-format", "json" }
-    end
+    if v1 then config.init_options.command = { "golangci-lint", "run", "--out-format", "json" } end
   end,
 }

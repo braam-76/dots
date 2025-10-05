@@ -3,7 +3,7 @@
 ---
 --- `mdx-analyzer`, a language server for MDX
 
-local util = require("lspconfig.util")
+local util = require "lspconfig.util"
 
 ---@type vim.lsp.Config
 return {

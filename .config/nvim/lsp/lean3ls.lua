@@ -25,10 +25,8 @@ return {
     -- check if inside elan stdlib
     local stdlib_dir
     do
-      local _, endpos = fname:find("/lean/library")
-      if endpos then
-        stdlib_dir = fname:sub(1, endpos)
-      end
+      local _, endpos = fname:find "/lean/library"
+      if endpos then stdlib_dir = fname:sub(1, endpos) end
     end
 
     on_dir(

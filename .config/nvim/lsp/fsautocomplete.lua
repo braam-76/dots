@@ -17,7 +17,7 @@
 --- This is automatically done by plugins such as [PhilT/vim-fsharp](https://github.com/PhilT/vim-fsharp), [fsharp/vim-fsharp](https://github.com/fsharp/vim-fsharp), and [adelarsq/neofsharp.vim](https://github.com/adelarsq/neofsharp.vim).
 ---
 
-local util = require("lspconfig.util")
+local util = require "lspconfig.util"
 
 ---@type vim.lsp.Config
 return {
@@ -37,12 +37,12 @@ return {
       ExternalAutocomplete = false,
       Linter = true,
       UnionCaseStubGeneration = true,
-      UnionCaseStubGenerationBody = 'failwith "Not Implemented"',
+      UnionCaseStubGenerationBody = "failwith \"Not Implemented\"",
       RecordStubGeneration = true,
-      RecordStubGenerationBody = 'failwith "Not Implemented"',
+      RecordStubGenerationBody = "failwith \"Not Implemented\"",
       InterfaceStubGeneration = true,
       InterfaceStubGenerationObjectIdentifier = "this",
-      InterfaceStubGenerationMethodBody = 'failwith "Not Implemented"',
+      InterfaceStubGenerationMethodBody = "failwith \"Not Implemented\"",
       UnusedOpensAnalyzer = true,
       UnusedDeclarationsAnalyzer = true,
       UseSdkScripts = true,

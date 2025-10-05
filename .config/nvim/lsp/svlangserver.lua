@@ -21,22 +21,32 @@ return {
     },
   },
   on_attach = function(client, bufnr)
-    vim.api.nvim_buf_create_user_command(bufnr, "LspSvlangserverBuildIndex", function()
-      client:exec_cmd({
-        title = "Build Index",
-        command = "systemverilog.build_index",
-      }, { bufnr = bufnr })
-    end, {
-      desc = "Instructs language server to rerun indexing",
-    })
-    vim.api.nvim_buf_create_user_command(bufnr, "LspSvlangserverReportHierarchy", function()
-      client:exec_cmd({
-        title = "Build Index",
-        command = "systemverilog.build_index",
-        arguments = { vim.fn.expand("<cword>") },
-      }, { bufnr = bufnr })
-    end, {
-      desc = "Generates hierarchy for the given module",
-    })
+    vim.api.nvim_buf_create_user_command(
+      bufnr,
+      "LspSvlangserverBuildIndex",
+      function()
+        client:exec_cmd({
+          title = "Build Index",
+          command = "systemverilog.build_index",
+        }, { bufnr = bufnr })
+      end,
+      {
+        desc = "Instructs language server to rerun indexing",
+      }
+    )
+    vim.api.nvim_buf_create_user_command(
+      bufnr,
+      "LspSvlangserverReportHierarchy",
+      function()
+        client:exec_cmd({
+          title = "Build Index",
+          command = "systemverilog.build_index",
+          arguments = { vim.fn.expand "<cword>" },
+        }, { bufnr = bufnr })
+      end,
+      {
+        desc = "Generates hierarchy for the given module",
+      }
+    )
   end,
 }

@@ -1,0 +1,60 @@
+{
+  "plugins": {
+    "blink.cmp": {
+      "rev": "a999ddc",
+      "src": "https://github.com/Saghen/blink.cmp"
+    },
+    "conform.nvim": {
+      "rev": "9d859cb",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "flash.nvim": {
+      "rev": "b68bda0",
+      "src": "https://github.com/folke/flash.nvim"
+    },
+    "kanagawa.nvim": {
+      "rev": "27f1e11",
+      "src": "https://github.com/rebelot/kanagawa.nvim"
+    },
+    "lazydev.nvim": {
+      "rev": "258d2a5",
+      "src": "https://github.com/folke/lazydev.nvim"
+    },
+    "lspkind.nvim": {
+      "rev": "3ddd1b4",
+      "src": "https://github.com/onsails/lspkind.nvim"
+    },
+    "mini.nvim": {
+      "rev": "79654ef",
+      "src": "https://github.com/echasnovski/mini.nvim"
+    },
+    "modus-themes.nvim": {
+      "rev": "c57c2c5",
+      "src": "https://github.com/miikanissi/modus-themes.nvim"
+    },
+    "neogit": {
+      "rev": "90dcfa7b",
+      "src": "https://github.com/NeogitOrg/neogit"
+    },
+    "nvim-treesitter": {
+      "rev": "42fc28ba",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "oil.nvim": {
+      "rev": "919e155",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "vague.nvim": {
+      "rev": "25107de",
+      "src": "https://github.com/vague2k/vague.nvim"
+    },
+    "wezterm-types": {
+      "rev": "cfa3aa4",
+      "src": "https://github.com/DrKJeff16/wezterm-types"
+    }
+  }
+}

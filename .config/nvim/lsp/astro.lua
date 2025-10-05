@@ -7,7 +7,7 @@
 --- npm install -g @astrojs/language-server
 --- ```
 
-local util = require("lspconfig.util")
+local util = require "lspconfig.util"
 
 ---@type vim.lsp.Config
 return {

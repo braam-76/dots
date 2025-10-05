@@ -16,9 +16,7 @@
 --- ```
 
 local bin_name = "ds-pinyin-lsp"
-if vim.fn.has("win32") == 1 then
-  bin_name = bin_name .. ".exe"
-end
+if vim.fn.has "win32" == 1 then bin_name = bin_name .. ".exe" end
 
 local function ds_pinyin_lsp_off(bufnr)
   local ds_pinyin_lsp_client = vim.lsp.get_clients({ bufnr = bufnr, name = "ds_pinyin_lsp" })[1]
@@ -27,7 +25,7 @@ local function ds_pinyin_lsp_off(bufnr)
       ["completion_on"] = false,
     })
   else
-    vim.notify("notification $/turn/completion is not supported by any servers active on the current buffer")
+    vim.notify "notification $/turn/completion is not supported by any servers active on the current buffer"
   end
 end
 
@@ -38,7 +36,7 @@ local function ds_pinyin_lsp_on(bufnr)
       ["completion_on"] = true,
     })
   else
-    vim.notify("notification $/turn/completion is not supported by any servers active on the current buffer")
+    vim.notify "notification $/turn/completion is not supported by any servers active on the current buffer"
   end
 end
 
@@ -57,11 +55,17 @@ return {
     max_suggest = 15,
   },
   on_attach = function(_, bufnr)
-    vim.api.nvim_buf_create_user_command(bufnr, "LspDsPinyinCompletionOff", function()
-      ds_pinyin_lsp_off(bufnr)
-    end, { desc = "Turn off the ds-pinyin-lsp completion" })
-    vim.api.nvim_buf_create_user_command(bufnr, "LspDsPinyinCompletionOn", function()
-      ds_pinyin_lsp_on(bufnr)
-    end, { desc = "Turn on the ds-pinyin-lsp completion" })
+    vim.api.nvim_buf_create_user_command(
+      bufnr,
+      "LspDsPinyinCompletionOff",
+      function() ds_pinyin_lsp_off(bufnr) end,
+      { desc = "Turn off the ds-pinyin-lsp completion" }
+    )
+    vim.api.nvim_buf_create_user_command(
+      bufnr,
+      "LspDsPinyinCompletionOn",
+      function() ds_pinyin_lsp_on(bufnr) end,
+      { desc = "Turn on the ds-pinyin-lsp completion" }
+    )
   end,
 }

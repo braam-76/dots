@@ -25,9 +25,7 @@
 
 local bin_name = "slangd"
 
-if vim.fn.has("win32") == 1 then
-  bin_name = "slangd.exe"
-end
+if vim.fn.has "win32" == 1 then bin_name = "slangd.exe" end
 
 ---@type vim.lsp.Config
 return {

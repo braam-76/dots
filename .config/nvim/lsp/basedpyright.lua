@@ -6,10 +6,10 @@
 
 local function set_python_path(command)
   local path = command.args
-  local clients = vim.lsp.get_clients({
+  local clients = vim.lsp.get_clients {
     bufnr = vim.api.nvim_get_current_buf(),
     name = "basedpyright",
-  })
+  }
   for _, client in ipairs(clients) do
     if client.settings then
       client.settings.python = vim.tbl_deep_extend("force", client.settings.python or {}, { pythonPath = path })
