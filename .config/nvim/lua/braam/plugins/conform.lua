@@ -9,6 +9,8 @@ conform.setup {
     python = { "ruff_organize_imports", "ruff_format" },
     lua = { "stylua" },
     cpp = { "clang_format" },
+    javascript = { "prettierd", "prettier", stop_after_first = true },
+    typescript = { "prettierd", "prettier", stop_after_first = true },
   },
 }
 

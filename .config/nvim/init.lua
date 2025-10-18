@@ -33,4 +33,7 @@ vim.keymap.set("n", "<C-Up>", "<C-w><C-k>", { desc = "Move focus to the upper wi
 vim.keymap.set("n", "<leader>so", ":update<CR> :source<CR>")
 
 vim.env.PATH = vim.env.PATH .. ":/home/linuxbrew/.linuxbrew/bin"
+
+-- require "innoitta_nvim.lua.innoitta".setup()
+
 require "braam/plugins"

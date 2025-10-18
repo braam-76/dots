@@ -4,7 +4,8 @@ vim.pack.add {
   { src = "https://github.com/folke/lazydev.nvim" },
   { src = "https://github.com/DrKJeff16/wezterm-types" },
 
-  {src = "https://github.com/onsails/lspkind.nvim"}
+  { src = "https://github.com/onsails/lspkind.nvim" },
+  { src = "https://github.com/nvim-tree/nvim-web-devicons" },
 }
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -29,6 +30,19 @@ require("lazydev").setup {
   },
 }
 
+local supported_categories = {
+  "file",
+  "folder",
+  "diagnostic",
+  "function",
+  "variable",
+  "class",
+  "module",
+  "method",
+  "property",
+  "enum",
+}
+
 require("blink.cmp").setup {
   fuzzy = {
     implementation = "prefer_rust",
@@ -44,42 +58,38 @@ require("blink.cmp").setup {
       },
     },
   },
+  keymap = {
+    ["C-k"] = { "show_signature", "hide_signature", "fallback" },
+  },
   completion = {
-    documentation = { auto_show = true, auto_show_delay_ms = 200 },
     menu = {
-      auto_show = true,
       draw = {
         components = {
           kind_icon = {
             text = function(ctx)
+              local icon = ctx.kind_icon
               if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                local mini_icon, _ = require("mini.icons").get_icon(ctx.item.data.type, ctx.label)
-                if mini_icon then return mini_icon .. ctx.icon_gap end
+                local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+                if dev_icon then icon = dev_icon end
+              else
+                icon = require("lspkind").symbolic(ctx.kind, {
+                  mode = "symbol",
+                })
               end
 
-              local icon = require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
               return icon .. ctx.icon_gap
             end,
 
-            -- Optionally, use the highlight groups from mini.icons
+            -- Optionally, use the highlight groups from nvim-web-devicons
             -- You can also add the same function for `kind.highlight` if you want to
             -- keep the highlight groups in sync with the icons.
             highlight = function(ctx)
+              local hl = ctx.kind_hl
               if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                local mini_icon, mini_hl = require("mini.icons").get_icon(ctx.item.data.type, ctx.label)
-                if mini_icon then return mini_hl end
+                local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+                if dev_icon then hl = dev_hl end
               end
-              return ctx.kind_hl
-            end,
-          },
-          kind = {
-            -- Optional, use highlights from mini.icons
-            highlight = function(ctx)
-              if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                local mini_icon, mini_hl = require("mini.icons").get_icon(ctx.item.data.type, ctx.label)
-                if mini_icon then return mini_hl end
-              end
-              return ctx.kind_hl
+              return hl
             end,
           },
         },
@@ -94,6 +104,7 @@ vim.lsp.enable {
   "jdtls",
   "pyright",
   "rust_analyzer",
+  "ts_ls",
 
   "clangd",
   "cmake", -- NOTE: remember to install 'cmake-language-server' with pip on new system
