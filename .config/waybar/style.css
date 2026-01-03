@@ -1,0 +1,230 @@
+/* ======================
+   Global
+   ====================== */
+* {
+    font-family: ZedMono Nerd Font, Symbols Nerd Font,FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    margin: 0 2;
+}
+
+/* ======================
+   Colors
+   ====================== */
+@define-color bg        #232530;
+@define-color bg-alt    #1c1e26;
+
+@define-color fg        #fdf0ed;
+@define-color grey      #6a6a6a;
+
+@define-color red       #e95678;
+@define-color yellow    #fab795;
+@define-color green     #09f7a0;
+
+/* ======================
+   Bar
+   ====================== */
+window#waybar {
+    background: transparent;
+    color: @fg;
+    transition: background-color .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* ======================
+   Buttons / Workspaces
+   ====================== */
+button {
+    border: none;
+    box-shadow: inset 0 -3px transparent;
+}
+
+button:hover {
+    box-shadow: inset 0 -3px @fg;
+}
+
+#workspaces button {
+    padding: 0 7px;
+    margin-right: 7px;
+    background: @bg-alt;
+    color: @fg;
+    box-shadow: inset 0 -3px @red;
+}
+
+#workspaces button:last-child {
+    margin-right: 0;
+}
+
+#workspaces button.focused {
+    background: @bg-alt;
+}
+
+#workspaces button.urgent {
+    background: @red;
+}
+
+#window {
+    padding: 0 7px;
+    border-radius: 5px;
+    background: @bg-alt;
+    box-shadow: inset 0 -3px @red;
+}
+
+/* ======================
+   Shared Module Style
+   ====================== */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd,
+#language,
+#keyboard-state {
+    padding: 0 10px;
+    border-radius: 5px;
+    color: @fg;
+    background: @bg-alt;
+    box-shadow: inset 0 -3px @red;
+}
+
+/* Margin handling */
+#window,
+#workspaces {
+    margin: 0;
+}
+
+/* ======================
+   Clock / Battery
+   ====================== */
+#clock {
+    box-shadow: inset 0 -3px @red;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: @green;
+}
+
+@keyframes blink {
+    to { color: @fg; }
+}
+
+#battery.critical:not(.charging) {
+    animation: blink 0.5s steps(12) infinite alternate;
+}
+
+/* ======================
+   Power Profiles
+   ====================== */
+#power-profiles-daemon.performance { color: @red; }
+#power-profiles-daemon.balanced    { color: @yellow; }
+#power-profiles-daemon.power-saver { color: @green; }
+
+/* ======================
+   Network / Audio
+   ====================== */
+#network.disconnected,
+#pulseaudio.muted,
+#wireplumber.muted {
+    background: @grey;
+}
+
+/* ======================
+   Media
+   ====================== */
+#custom-media {
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify { background: #66cc99; }
+#custom-media.custom-vlc     { background: #ffa000; }
+
+/* ======================
+   Temperature
+   ====================== */
+#temperature {
+    background: #f0932b;
+}
+
+#temperature.critical {
+    background: #eb4d4b;
+}
+
+/* ======================
+   Tray
+   ====================== */
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: @red;
+}
+
+/* ======================
+   Idle Inhibitor
+   ====================== */
+#idle_inhibitor {
+    background: #2d3436;
+}
+
+#idle_inhibitor.activated {
+    background: #ecf0f1;
+    color: #2d3436;
+}
+
+/* ======================
+   MPD
+   ====================== */
+#mpd { background: #66cc99; color: #2a5c45; }
+#mpd.disconnected { background: #f53c3c; }
+#mpd.stopped      { background: #90b1b1; }
+#mpd.paused       { background: #51a37a; }
+
+/* ======================
+   Keyboard / Language
+   ====================== */
+#language,
+#keyboard-state {
+    padding: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+/* ======================
+   Scratchpad / Privacy
+   ====================== */
+#scratchpad {
+    background: rgba(0,0,0,0.2);
+}
+
+#scratchpad.empty {
+    background: transparent;
+}
+
+#privacy-item {
+    padding: 0 5px;
+    color: white;
+}
+
+#privacy-item.screenshare { background: #cf5700; }
+#privacy-item.audio-in    { background: #1ca000; }
+#privacy-item.audio-out   { background: #0069d4; }

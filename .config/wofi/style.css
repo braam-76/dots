@@ -1,0 +1,96 @@
+@define-color primary #1c1e26;
+@define-color secondary #232530;
+@define-color background #1c1e26;
+@define-color surface #232530;
+@define-color on-secondary #e95678;
+@define-color on-primary #fdf0ed;
+@define-color on-background @on-primary;
+@define-color on-surface #e95678;
+
+* {
+    font-family: "ZedMono Nerd Font", "Iosevka Nerd Font", monospace;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 7px;
+}
+
+*:selected {
+    color: @on-primary;
+    background-color: @primary;
+}
+
+/* Window */
+window {
+    margin: auto;
+    padding: 10px;
+    border: 3px solid @on-primary;
+    background-color: @background;
+    animation: slideIn 0.5s ease-in-out both;
+}
+
+/* Slide In */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Inner Box */
+#inner-box {
+    margin: 5px;
+    padding: 10px;
+    background-color: @surface;
+    animation: fadeIn 0.5s ease-in-out both;
+}
+
+/* Fade In */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Outer Box */
+#outer-box {
+    margin: 3px;
+    padding: 10px;
+    background-color: @surface;
+}
+
+/* Scroll */
+#scroll {
+    margin: 0px;
+    padding: 10px;
+}
+
+/* Input */
+#input {
+    margin: 5px;
+    padding: 10px;
+    color: @on-background;
+    background-color: @secondary;
+    animation: fadeIn 0.5s ease-in-out both;
+}
+
+/* Text */
+#text {
+    margin: 5px;
+    padding: 10px;
+    color: @on-surface;
+    animation: fadeIn 0.5s ease-in-out both;
+}
+
+/* Selected Entry */
+#entry:selected {
+    background-color: @primary;
+}
+
+#entry:selected #text {
+    color: @on-primary;
+}

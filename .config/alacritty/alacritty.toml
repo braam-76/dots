@@ -1,0 +1,27 @@
+[font]
+normal = { family = "ZedMono Nerd Font", style = "Regular" }
+bold = { family = "ZedMono Nerd Font", style = "bold" }
+italic = { family = "ZedMono Nerd Font", style = "italic" }
+bold_italic = { family = "ZedMono Nerd Font", style = "bold italic" }
+size = 14
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[cursor]
+style = { shape = "Beam", blinking = "On" }
+
+[colors.primary]
+foreground = "#fdf0ed" # White
+background = "#232530" # Black
+
+[colors.normal]
+black = "#232530"
+white = "#fdf0ed"
+red = "#e95678"
+green = "#09f8a0"
+yellow = "#fab795"
+blue = "#21bfc2"
+magenta = "#6c6f93"
+cyan = "#59e3e3"
