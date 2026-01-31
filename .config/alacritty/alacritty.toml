@@ -3,7 +3,7 @@ normal = { family = "ZedMono Nerd Font", style = "Regular" }
 bold = { family = "ZedMono Nerd Font", style = "bold" }
 italic = { family = "ZedMono Nerd Font", style = "italic" }
 bold_italic = { family = "ZedMono Nerd Font", style = "bold italic" }
-size = 14
+size = 12
 
 [selection]
 save_to_clipboard = true

@@ -9,18 +9,7 @@ vim.pack.add {
   { src = "https://github.com/zenbones-theme/zenbones.nvim" },
   { src = "https://github.com/jaredgorski/Mies.vim" },
   { src = "https://github.com/rktjmp/lush.nvim" },
+  { src = "https://github.com/lunarvim/horizon.nvim" }
 }
 
-require("auto-dark-mode").setup {
-  set_dark_mode = function()
-    vim.o.background = "dark"
-    vim.cmd.colorscheme "vague"
-  end,
-  set_light_mode = function()
-    vim.o.background = "light"
-    vim.cmd.colorscheme "mies"
-  end,
-  update_interval = 1000,
-}
--- vim.cmd.set "notermguicolors"
---
+vim.cmd[[colorscheme horizon]]

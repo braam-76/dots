@@ -24,7 +24,10 @@
       "rev": "b68bda0",
       "src": "https://github.com/folke/flash.nvim"
     },
-    "innoitta.nvim": [],
+    "horizon.nvim": {
+      "rev": "f7c758f0ebd47a72dd2832a8744340e72dad62f8",
+      "src": "https://github.com/lunarvim/horizon.nvim"
+    },
     "kanagawa.nvim": {
       "rev": "27f1e11",
       "src": "https://github.com/rebelot/kanagawa.nvim"

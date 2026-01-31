@@ -5,12 +5,13 @@ focus_follows_mouse yes
 
 font pango:ZedMono Nerd Font 12
 
-default_border pixel
+default_border none
+default_floating_border none
 titlebar_padding 1
 titlebar_border_thickness 0
 
-gaps inner 8
-gaps outer 4
+gaps inner 15
+gaps outer 5
 
 gaps left 4
 gaps right 4
@@ -29,12 +30,12 @@ set $menu wofi
 
 exec waybar
 exec --no-startup-id emacs --daemon
-exec --no-startup-id nekoray --tray
+exec --no-startup-id nekoray
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/braam/Downloads/wallpaperflare.com_wallpaper.jpg fill
 
 ### Input configuration
 input * {
@@ -45,7 +46,7 @@ input * {
 # Key bindings
 #
     bindsym --to-code $mod+Return exec $term
-    bindsym --to-code $mod+q kill
+    bindsym --to-code $mod+c kill
     bindsym --to-code $mod+d exec $menu
     floating_modifier $mod normal
     bindsym --to-code $mod+Shift+r reload
@@ -103,31 +104,31 @@ input * {
     bindsym --to-code  $mod+Shift+9 move container to workspace number 9
     bindsym --to-code  $mod+Shift+0 move container to workspace number 10
 
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym --to-code  $mod+b splith
-    bindsym --to-code  $mod+v splitv
+# #
+# # Layout stuff:
+# #
+#     # You can "split" the current object of your focus with
+#     # $mod+b or $mod+v, for horizontal and vertical splits
+#     # respectively.
+#     bindsym --to-code  $mod+b splith
+#     bindsym --to-code  $mod+v splitv
 
-    # Switch the current container between different layout styles
-    bindsym --to-code  $mod+s layout stacking
-    bindsym --to-code  $mod+w layout tabbed
-    bindsym --to-code  $mod+e layout toggle split
+#     # Switch the current container between different layout styles
+#     bindsym --to-code  $mod+s layout stacking
+#     bindsym --to-code  $mod+w layout tabbed
+#     bindsym --to-code  $mod+e layout toggle split
 
-    # Make the current focus fullscreen
-    bindsym --to-code  $mod+f fullscreen
+#     # Make the current focus fullscreen
+    bindsym --to-code  $mod+Shift+f fullscreen
 
-    # Toggle the current focus between tiling and floating mode
-    bindsym --to-code  $mod+Shift+space floating toggle
+#     # Toggle the current focus between tiling and floating mode
+    bindsym --to-code  $mod+f floating toggle
 
-    # Swap focus between the tiling area and the floating area
-    bindsym --to-code  $mod+space focus mode_toggle
+#     # Swap focus between the tiling area and the floating area
+#     bindsym --to-code  $mod+space focus mode_toggle
 
-    # Move focus to the parent container
-    bindsym --to-code  $mod+a focus parent
+#     # Move focus to the parent container
+#     bindsym --to-code  $mod+a focus parent
 
 #
 # Scratchpad:
@@ -179,6 +180,6 @@ bindsym --to-code  $mod+r mode "resize"
     bindsym --to-code  --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --to-code  --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
-    bindsym --to-code  Print exec grim
+    bindsym Print exec grim -g "$(slurp)" ~/Pictures/screenshot_$(date +%F_%T).png
 
 include /etc/sway/config.d/*

@@ -9,8 +9,6 @@
 ;;
 ;; Use 'C-h f package\!' to look up documentation for the `package!' macro.
 
-(package! treesit-auto)
-
 (package! catppuccin-theme)
 (package! inkpot-theme)
 (package! silkworm-theme)
