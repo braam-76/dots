@@ -14,6 +14,8 @@
 (package! silkworm-theme)
 (package! cacao-theme)
 (package! busybee-theme)
+(package! c3-ts-mode
+  :recipe (:host github :repo "c3lang/c3-ts-mode"))
 
 (package! temple-os-theme
   :recipe (:host github :repo "Senka07/temple-os-emacs-theme"))
