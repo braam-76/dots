@@ -17,6 +17,8 @@
 (package! c3-ts-mode
   :recipe (:host github :repo "c3lang/c3-ts-mode"))
 
+(package! alabaster-themes)
+
 (package! temple-os-theme
   :recipe (:host github :repo "Senka07/temple-os-emacs-theme"))
 

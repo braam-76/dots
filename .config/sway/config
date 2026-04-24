@@ -3,7 +3,7 @@ set $mod Mod4
 mouse_warping none
 focus_follows_mouse yes
 
-font pango:ZedMono Nerd Font 12
+font pango:IosevkaTerm Nerd Font 12
 
 default_border none
 default_floating_border none
@@ -50,8 +50,8 @@ input * {
     bindsym --to-code $mod+d exec $menu
     floating_modifier $mod normal
     bindsym --to-code $mod+Shift+r reload
-    bindsym --to-code $mod+Shift+e exec uwsm stop
-    # bindsym --to-code  $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    # bindsym --to-code $mod+Shift+e exec uwsm stop
+    bindsym --to-code  $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
 #
 # Moving around:
