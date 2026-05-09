@@ -32,8 +32,59 @@ vim.keymap.set("n", "<C-Down>", "<C-w><C-j>", { desc = "Move focus to the lower 
 vim.keymap.set("n", "<C-Up>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 vim.keymap.set("n", "<leader>so", ":update<CR> :source<CR>")
 
-vim.env.PATH = vim.env.PATH .. ":/home/linuxbrew/.linuxbrew/bin"
 
--- require "innoitta_nvim.lua.innoitta".setup()
+-- Theme
+vim.pack.add {
+  {src = "https://github.com/phha/zenburn.nvim"},
+    { src = "https://github.com/vague2k/vague.nvim" },
+}
 
-require "braam/plugins"
+vim.cmd[[colorscheme vague]]
+
+-- Flash.nvim
+vim.pack.add {
+  { src = "https://github.com/folke/flash.nvim" },
+}
+
+vim.keymap.set({ "n", "x", "o" }, "s", function() require "flash".jump() end)
+vim.keymap.set({ "n", "x", "o" }, "S", function() require "flash".treesitter() end)
+vim.keymap.set({ "o" },           "r", function() require "flash".remote() end)
+vim.keymap.set({ "o", "x" },      "R", function() require "flash".treesitter_search() end)
+
+-- File manager
+vim.pack.add {
+  { src = "https://github.com/stevearc/oil.nvim" },
+}
+
+require "oil".setup {
+  default_file_explorer = true,
+  columns = { "icon" },
+  view_options = {
+    show_hidden = true,
+  },
+}
+
+vim.keymap.set("n", "<leader>o", "<cmd>Oil<CR>")
+
+-- Git UI
+vim.pack.add {
+  { src = "https://github.com/NeogitOrg/neogit" },
+  { src = "https://github.com/nvim-lua/plenary.nvim" },
+}
+
+vim.keymap.set("n", "<leader>g", "<cmd>Neogit<CR>")
+
+-- LSP
+vim.pack.add{
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
+}
+
+vim.lsp.enable {
+  "lua_ls",
+  "pyright",
+  "rust_analyzer",
+
+  "clangd",
+  "cmake", -- NOTE: remember to install 'cmake-language-server' with pip on new system
+}
+
