@@ -1,0 +1,12 @@
+{
+  "flash.nvim": { "branch": "main", "commit": "fcea7ff883235d9024dc41e638f164a450c14ca2" },
+  "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
+  "mini.completion": { "branch": "main", "commit": "7c5edfc0e479dd4edd898cc9ddd1920d8c1ce420" },
+  "neogit": { "branch": "master", "commit": "395ac481e197784e410b59b987fadaf9e7481df1" },
+  "nvim-lspconfig": { "branch": "master", "commit": "451d4ef9abd4f0f08e379ef0d55d1c391b6125a7" },
+  "nvim-web-devicons": { "branch": "master", "commit": "2795c26c916bb3c57dde308b82be51971fa92747" },
+  "oil.nvim": { "branch": "master", "commit": "0fcc83805ad11cf714a949c98c605ed717e0b83e" },
+  "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
+  "vague.nvim": { "branch": "main", "commit": "fd58046b9d64259d9785e4aeb6d6f494c6943cad" },
+  "zenburn.nvim": { "branch": "master", "commit": "f5ee12b30119499c7fa7f95719cd7c5aab9f9f29" }
+}
