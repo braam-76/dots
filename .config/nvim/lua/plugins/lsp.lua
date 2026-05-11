@@ -3,25 +3,25 @@ return {
     "neovim/nvim-lspconfig",
 
     config = function()
-      vim.lsp.config("lua_ls", {
-        cmd = { "lua-language-server" },
-        filetypes = { "lua" },
+      vim.lsp.config("tinymist", {
+        cmd = { "tinymist" },
+        filetypes = { "typst" },
         root_markers = { ".git" },
-
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim", "require" },
-            },
-
-            workspace = {
-              library = vim.api.nvim_get_runtime_file("", true),
-            },
-          },
-        },
+        on_attach = function(client, bufnr)
+          vim.keymap.set(
+            "n",
+            "<leader>pr",
+            "<cmd>TypstPreview<CR>",
+            {
+              buffer = bufnr,
+              desc = "Typst Preview",
+            }
+          )
+        end,
       })
 
       vim.lsp.enable({
+        "tinymist",
         "lua_ls",
         "pyright",
         "rust_analyzer",
