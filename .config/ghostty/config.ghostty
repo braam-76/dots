@@ -3,7 +3,8 @@ command = fish --login --interactive
 font-family = Fantasque Sans Mono
 font-size = 14
 
-theme = Vague
+# theme = Vague
+config-file = ?auto/theme.ghostty
 
 # background-opacity = 0.85
 
