@@ -24,6 +24,10 @@
 (use-package racket-mode
   :ensure t)
 
+;; Chicken Scheme
+(use-package geiser-chicken
+  :ensure t)
+
 ;; Doom-like code bindings for Eglot
 (with-eval-after-load 'eglot
   (keymap-global-set "C-c c a" #'eglot-code-actions)

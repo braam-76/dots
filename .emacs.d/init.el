@@ -62,6 +62,9 @@
 (use-package transient :ensure t :demand t)
 (use-package magit :ensure t)
 
+(use-package evil
+  :ensure t)
+
 ;;; Better dired
 (use-package dired
   :ensure nil
