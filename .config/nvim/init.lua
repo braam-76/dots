@@ -10,7 +10,7 @@ vim.o.showmode = false
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.signcolumn = "yes"
--- vim.o.winborder = "rounded"
+vim.o.winborder = "rounded"
 
 vim.o.expandtab = true
 vim.o.tabstop = 2
@@ -31,5 +31,3 @@ vim.keymap.set("n", "<C-Right>", "<C-w><C-l>", { desc = "Move focus to the right
 vim.keymap.set("n", "<C-Down>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-Up>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 vim.keymap.set("n", "<leader>so", "<cmd>update | source %<CR>")
-
-require "config.lazy"
