@@ -2,3 +2,8 @@
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
 SETUVAR __fish_initialized:4300
+SETUVAR _fisher_asim_2D_tahir_2F_opencode_2E_fish_files:\x7e/\x2econfig/fish/functions/_opencode\x2einit\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/opencode\x2efish\x1e\x7e/\x2econfig/fish/completions/opencode\x2efish
+SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1easim\x2dtahir/opencode\x2efish
+SETUVAR _fisher_upgraded_to_4_4:\x1d
+SETUVAR fish_user_paths:/home/braam/\x2eopencode/bin\x1e/home/braam/\x2ecargo/bin
