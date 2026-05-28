@@ -47,5 +47,10 @@
 (elpaca elpaca-use-package
   (elpaca-use-package-mode))
 
+(setq use-package-always-ensure t)
+
+;; solves dependency problems, when packages needs compat 31
+(use-package compat :ensure t)
+
 (provide 'package-manager)
 ;;; package-manager.el ends here
