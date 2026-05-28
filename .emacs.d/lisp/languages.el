@@ -1,47 +1,52 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; Code:
 
-;; C, C++
-(add-hook 'c-mode-hook #'eglot-ensure)
-(add-hook 'c++-mode-hook #'eglot-ensure)
-(add-hook 'c-or-c++-mode-hook #'eglot-ensure)
-(add-hook 'cmake-mode-hook #'eglot-ensure)
+(use-package rust-mode
+  :hook (rust-mode . (lambda ()
+                       (setq indent-tabs-mode nil)  ; use spaces
+                       (prettify-symbols-mode)))
+  :config
+  (setq rust-format-on-save t))  ; auto-format with rustfmt
 
-;; Python
-(add-hook 'python-mode-hook    #'eglot-ensure)
-(add-hook 'python-ts-mode-hook #'eglot-ensure)
-;; Ruff for linting (separate from eglot/basedpyright)
 (use-package flymake-ruff
-  :ensure t
   :hook
-  (python-mode-hook    . flymake-ruff-load)
-  (python-ts-mode-hook . flymake-ruff-load))
+  (python-mode . flymake-ruff-load)
+  (python-ts-mode . flymake-ruff-load))
 
-;; Common Lisp
+;; Lisp ecosystems
 (use-package sly :ensure t)
+(use-package racket-mode :ensure t)
+(use-package geiser-chicken :ensure t)
 
-;; Racket
-(use-package racket-mode
-  :ensure t)
+(use-package typst-ts-mode
+  :ensure (:type git :host codeberg :repo "meow_king/typst-ts-mode" :branch "main")
+  :custom
+  ;; don't add "--open" if you'd like `watch` to be an error detector
+  (typst-ts-mode-watch-options "--open")
+  
+  ;; experimental settings (I'm the main dev, so I enable these)
+  (typst-ts-mode-enable-raw-blocks-highlight t)
+  (typst-ts-mode-highlight-raw-blocks-at-startup t))
 
-;; Chicken Scheme
-(use-package geiser-chicken
-  :ensure t)
+(use-package eglot
+  :ensure nil
+  :hook
+  ;; C / C++
+  (c-mode-hook        . eglot-ensure)
+  (c++-mode-hook      . eglot-ensure)
+  (c-or-c++-mode-hook . eglot-ensure)
+  (cmake-mode-hook    . eglot-ensure)
+  
+  ;; Python
+  (python-mode-hook    . eglot-ensure)
+  (python-ts-mode-hook . eglot-ensure)
 
-;; Doom-like code bindings for Eglot
-(with-eval-after-load 'eglot
-  (keymap-global-set "C-c c a" #'eglot-code-actions)
-  (keymap-global-set "C-c c r" #'eglot-rename)
-  (keymap-global-set "C-c c x" #'eglot-execute-command)
-  (keymap-global-set "C-c c f" #'eglot-format)
-  (keymap-global-set "C-c c o" #'eglot-code-action-organize-imports)
-  (keymap-global-set "C-c c h" #'eldoc)
-  (keymap-global-set "C-c c d" #'xref-find-definitions)
-  (keymap-global-set "C-c c D" #'xref-find-references)
+  ;; Rust
+  (rust-mode    . eglot-ensure)
+  (rust-ts-mode . eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer"))))
 
-  (keymap-global-set "C-c c e" #'flymake-show-buffer-diagnostics)
-  (keymap-global-set "C-c c n" #'flymake-goto-next-error)
-  (keymap-global-set "C-c c p" #'flymake-goto-prev-error))
 
 (provide 'languages)
 ;;; languages.el ends here
