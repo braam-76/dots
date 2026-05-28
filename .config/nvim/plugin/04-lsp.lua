@@ -1,5 +1,6 @@
 vim.pack.add({
   { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/mason-org/mason.nvim" },
   { src = "https://github.com/stevearc/conform.nvim" },
   { src = "https://github.com/Olical/conjure" },
 
@@ -32,6 +33,8 @@ cmp.setup({
     implementation = "prefer_rust_with_warning",
   },
 })
+
+require("mason").setup()
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -67,7 +70,7 @@ vim.lsp.config("tinymist", {
 vim.lsp.enable({
   "tinymist",
   "lua_ls",
-  "pyright",
+  "basedpyright",
   "rust_analyzer",
   "clangd",
   "cmake",
