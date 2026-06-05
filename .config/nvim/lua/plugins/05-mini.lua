@@ -5,6 +5,7 @@ return {
     require("mini.icons").setup()
     require("mini.pairs").setup()
     require("mini.surround").setup()
+
     require("mini.ai").setup({
       mappings = {
         around_next = "aa",

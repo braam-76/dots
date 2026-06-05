@@ -1,15 +1,5 @@
 return {
   {
-    "mikavilpas/yazi.nvim",
-    version = "*",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    keys = {
-      { "<leader>y", "<cmd>Yazi<cr>", mode = { "n", "v" }, desc = "Open yazi at the current file" },
-    },
-  },
-  {
     "stevearc/oil.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -20,8 +10,30 @@ return {
     config = function()
       require("oil").setup({
         default_file_explorer = true,
-        columns = { "permission", "size", "mtime", "icon" },
+        columns = { "permissions", "size", "mtime", "icon" },
       })
     end,
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      view = { width = 30 },
+      renderer = { group_empty = true },
+    },
+    keys = {
+      {
+        "<leader>e",
+        function()
+          require("nvim-tree.api").tree.toggle()
+        end,
+        mode = { "n" },
+        desc = "Open file tree",
+      },
+    },
   },
 }
