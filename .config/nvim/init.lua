@@ -90,13 +90,17 @@ vim.pack.add({
   "https://github.com/j-hui/fidget.nvim",
 
   "https://github.com/saghen/blink.cmp",
-  "https://github.com/L3MON4D3/LuaSnip",
   "https://github.com/saghen/blink.lib",
+
+  "https://github.com/L3MON4D3/LuaSnip",
+  "https://github.com/rafamadriz/friendly-snippets",
 
   "https://github.com/neovim/nvim-lspconfig",
 
   "https://github.com/stevearc/conform.nvim",
 })
+
+require("luasnip.loaders.from_vscode").lazy_load()
 
 require("fidget").setup({})
 
@@ -159,6 +163,7 @@ vim.pack.add({
   "https://github.com/braam-76/mini-in-one.nvim",
 })
 
+--- @type MiniInOne
 local mini_in_one = require("mini-in-one")
 mini_in_one.setup({
   icons = {},
