@@ -1,3 +1,4 @@
+-- Options --
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
@@ -48,74 +49,36 @@ vim.diagnostic.config({
 local map = vim.keymap.set
 
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
 map("n", "<leader>w", "<C-w>", { desc = "Better C-w" })
 map("n", "<leader>-", "<cmd>Explore<CR>", { desc = "Open netrw" })
 
-vim.pack.add({
-  "https://github.com/datsfilipe/vesper.nvim",
-  "https://github.com/vague2k/vague.nvim",
-})
-
+-- Themes --
+vim.pack.add({ "https://github.com/vague2k/vague.nvim" })
 vim.cmd.colorscheme("vague")
 
-vim.pack.add({
-  "https://github.com/folke/flash.nvim",
-})
+-- Flash --
+vim.pack.add({ "https://github.com/folke/flash.nvim" })
 
 local f = require("flash")
-
 map({ "n", "x", "o" }, "<leader>s", f.jump, { desc = "Flash" })
 map({ "n", "x", "o" }, "<leader>S", f.treesitter, { desc = "Flash Treesitter" })
 map({ "o" }, "r", f.remote, { desc = "Remote Flash" })
 map({ "o", "x" }, "R", f.treesitter_search, { desc = "Treesitter Search" })
 map({ "c" }, "<c-s>", f.toggle, { desc = "Toggle Flash Search" })
 
+-- Which key --
 vim.pack.add({ "https://github.com/folke/which-key.nvim" })
 local wk = require("which-key")
 map("n", "<leader>?", wk.show, { desc = "Buffer Local Keymaps (which-key)" })
 
-vim.pack.add({
-  "https://github.com/chomosuke/typst-preview.nvim",
-})
+-- Typst --
+vim.pack.add({ "https://github.com/chomosuke/typst-preview.nvim" })
 
 require("typst-preview").setup({
   dependencies_bin = {
     ["tinymist"] = "tinymist",
     ["websocat"] = "websocat",
   },
-})
-
-vim.pack.add({
-  "https://github.com/j-hui/fidget.nvim",
-
-  "https://github.com/saghen/blink.cmp",
-  "https://github.com/saghen/blink.lib",
-
-  "https://github.com/L3MON4D3/LuaSnip",
-  "https://github.com/rafamadriz/friendly-snippets",
-
-  "https://github.com/neovim/nvim-lspconfig",
-
-  "https://github.com/stevearc/conform.nvim",
-})
-
-require("luasnip.loaders.from_vscode").lazy_load()
-
-require("fidget").setup({})
-
-require("blink.cmp").setup({
-  keymap = { preset = "super-tab" },
-  appearance = { nerd_font_variant = "mono" },
-
-  completion = {
-    documentation = { auto_show = true, auto_show_delay_ms = 200 },
-  },
-
-  sources = { default = { "lsp", "path", "snippets" } },
-  snippets = { preset = "luasnip" },
-  fuzzy = { implementation = "lua" },
-  signature = { enabled = true },
 })
 
 vim.lsp.config("tinymist", {
@@ -134,6 +97,47 @@ vim.lsp.config("tinymist", {
   end,
 })
 
+-- Markdown --
+vim.pack.add({ "https://github.com/iamcco/markdown-preview.nvim" })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.keymap.set("n", "<leader>pr", "<cmd>MarkdownPreview<CR>", {
+      desc = "Markdown Preview",
+    })
+  end,
+})
+
+-- LSP --
+vim.pack.add({
+  "https://github.com/saghen/blink.cmp",
+  "https://github.com/saghen/blink.lib",
+
+  "https://github.com/L3MON4D3/LuaSnip",
+  "https://github.com/rafamadriz/friendly-snippets",
+
+  "https://github.com/neovim/nvim-lspconfig",
+
+  "https://github.com/stevearc/conform.nvim",
+})
+
+require("luasnip.loaders.from_vscode").lazy_load()
+
+require("blink.cmp").setup({
+  keymap = { preset = "super-tab" },
+  appearance = { nerd_font_variant = "mono" },
+
+  completion = {
+    documentation = { auto_show = true, auto_show_delay_ms = 200 },
+  },
+
+  sources = { default = { "lsp", "path", "snippets" } },
+  snippets = { preset = "luasnip" },
+  fuzzy = { implementation = "lua" },
+  signature = { enabled = true },
+})
+
 vim.lsp.enable({
   "tinymist",
   "lua_ls",
@@ -147,7 +151,7 @@ vim.lsp.enable({
 
 map("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
 
--- Conform for formatting
+-- Formatting --
 require("conform").setup({
   formatters_by_ft = {
     lua = { "stylua" },
@@ -163,12 +167,17 @@ vim.pack.add({
   "https://github.com/braam-76/mini-in-one.nvim",
 })
 
---- @type MiniInOne
+-- Mini --
+---@type MiniInOne
 local mini_in_one = require("mini-in-one")
 mini_in_one.setup({
-  icons = {},
-  pairs = {},
-  surround = {},
+  icons = "defaults",
+  pairs = "defaults",
+  surround = "defaults",
+  diff = "defaults",
+  notify = "defaults",
+  indentscope = "defaults",
+
   ai = {
     mappings = {
       around_next = "aa",
@@ -189,18 +198,12 @@ mini_in_one.setup({
 })
 
 local pick = mini_in_one.pick.builtin
-
 map("n", "<leader> ", pick.files, { desc = "Mini files" })
 map("n", "<leader>mg", pick.grep_live, { desc = "Mini grep live" })
 map("n", "<leader>mb", pick.buffers, { desc = "Mini buffers" })
 map("n", "<leader>mh", pick.help, { desc = "Mini help" })
 
-vim.pack.add({
-  "https://github.com/NeogitOrg/neogit",
-  "https://github.com/nvim-lua/plenary.nvim",
-})
+-- Git --
+vim.pack.add({ "https://github.com/NeogitOrg/neogit" })
 
 map("n", "<leader>g", "<cmd>Neogit<CR>", { desc = "Open Neogit" })
-
-vim.pack.add({ "https://github.com/lukas-reineke/indent-blankline.nvim" })
-require("ibl").setup({})

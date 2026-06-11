@@ -32,8 +32,12 @@
       "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
+    "markdown-preview.nvim": {
+      "rev": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee",
+      "src": "https://github.com/iamcco/markdown-preview.nvim"
+    },
     "mini-in-one.nvim": {
-      "rev": "cbd39d03b3b3d581cc7972dbefc9d9aff4531f11",
+      "rev": "a05e4ef8e557b7f9975e3d05b73d03a4487a1230",
       "src": "https://github.com/braam-76/mini-in-one.nvim"
     },
     "mini.nvim": {
