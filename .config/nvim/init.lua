@@ -46,30 +46,31 @@ vim.diagnostic.config({
   },
 })
 
-local map = vim.keymap.set
-
-map("n", "<Esc>", "<cmd>nohlsearch<CR>")
-map("n", "<leader>w", "<C-w>", { desc = "Better C-w" })
-map("n", "<leader>-", "<cmd>Explore<CR>", { desc = "Open netrw" })
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Better C-w" })
 
 -- Themes --
-vim.pack.add({ "https://github.com/vague2k/vague.nvim" })
-vim.cmd.colorscheme("vague")
+vim.pack.add({
+  "https://github.com/vague2k/vague.nvim",
+  "https://github.com/miikanissi/modus-themes.nvim",
+  "https://github.com/catppuccin/nvim",
+})
+vim.cmd.colorscheme("catppuccin-mocha")
 
 -- Flash --
 vim.pack.add({ "https://github.com/folke/flash.nvim" })
 
 local f = require("flash")
-map({ "n", "x", "o" }, "<leader>s", f.jump, { desc = "Flash" })
-map({ "n", "x", "o" }, "<leader>S", f.treesitter, { desc = "Flash Treesitter" })
-map({ "o" }, "r", f.remote, { desc = "Remote Flash" })
-map({ "o", "x" }, "R", f.treesitter_search, { desc = "Treesitter Search" })
-map({ "c" }, "<c-s>", f.toggle, { desc = "Toggle Flash Search" })
+vim.keymap.set({ "n", "x", "o" }, "<leader>s", f.jump, { desc = "Flash" })
+vim.keymap.set({ "n", "x", "o" }, "<leader>S", f.treesitter, { desc = "Flash Treesitter" })
+vim.keymap.set({ "o" }, "r", f.remote, { desc = "Remote Flash" })
+vim.keymap.set({ "o", "x" }, "R", f.treesitter_search, { desc = "Treesitter Search" })
+vim.keymap.set({ "c" }, "<c-s>", f.toggle, { desc = "Toggle Flash Search" })
 
 -- Which key --
 vim.pack.add({ "https://github.com/folke/which-key.nvim" })
 local wk = require("which-key")
-map("n", "<leader>?", wk.show, { desc = "Buffer Local Keymaps (which-key)" })
+vim.keymap.set("n", "<leader>?", wk.show, { desc = "Buffer Local Keymaps (which-key)" })
 
 -- Typst --
 vim.pack.add({ "https://github.com/chomosuke/typst-preview.nvim" })
@@ -120,9 +121,18 @@ vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig",
 
   "https://github.com/stevearc/conform.nvim",
+
+  "https://github.com/folke/lazydev.nvim",
+  "https://github.com/DrKJeff16/wezterm-types"
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
+
+require("lazydev").setup({
+  library = {
+    { path = "wezterm-types", mods = { "wezterm" } },
+  }
+})
 
 require("blink.cmp").setup({
   keymap = { preset = "super-tab" },
@@ -132,13 +142,28 @@ require("blink.cmp").setup({
     documentation = { auto_show = true, auto_show_delay_ms = 200 },
   },
 
-  sources = { default = { "lsp", "path", "snippets" } },
+  sources = {
+    default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+    providers = {
+      lazydev = {
+        name = "LazyDev",
+        module = "lazydev.integrations.blink",
+        score_offset = 100,
+      },
+    },
+  },
+
   snippets = { preset = "luasnip" },
   fuzzy = { implementation = "lua" },
   signature = { enabled = true },
 })
 
+vim.pack.add({ "https://github.com/mason-org/mason.nvim" })
+require("mason").setup()
+
 vim.lsp.enable({
+  "mesonlsp",
+  "gopls",
   "tinymist",
   "lua_ls",
   "basedpyright",
@@ -149,7 +174,7 @@ vim.lsp.enable({
   "racket_langserver",
 })
 
-map("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
 
 -- Formatting --
 require("conform").setup({
@@ -159,7 +184,6 @@ require("conform").setup({
     rust = { "rustfmt", lsp_format = "fallback" },
     javascript = { "prettierd", "prettier", stop_after_first = true },
   },
-  format_on_save = true,
 })
 
 vim.pack.add({
@@ -198,12 +222,24 @@ mini_in_one.setup({
 })
 
 local pick = mini_in_one.pick.builtin
-map("n", "<leader> ", pick.files, { desc = "Mini files" })
-map("n", "<leader>mg", pick.grep_live, { desc = "Mini grep live" })
-map("n", "<leader>mb", pick.buffers, { desc = "Mini buffers" })
-map("n", "<leader>mh", pick.help, { desc = "Mini help" })
+vim.keymap.set("n", "<leader> ", pick.files, { desc = "Mini files" })
+vim.keymap.set("n", "<leader>mg", pick.grep_live, { desc = "Mini grep live" })
+vim.keymap.set("n", "<leader>mb", pick.buffers, { desc = "Mini buffers" })
+vim.keymap.set("n", "<leader>mh", pick.help, { desc = "Mini help" })
 
 -- Git --
 vim.pack.add({ "https://github.com/NeogitOrg/neogit" })
 
-map("n", "<leader>g", "<cmd>Neogit<CR>", { desc = "Open Neogit" })
+vim.keymap.set("n", "<leader>g", "<cmd>Neogit<CR>", { desc = "Open Neogit" })
+
+vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
+require("oil").setup({
+  default_file_explorer = true,
+  columns = {
+    "icon",
+    "permissions",
+    "size",
+    "mtime",
+  },
+})
+vim.keymap.set("n", "<leader>-", "<cmd>Oil<CR>", { desc = "Open netrw" })

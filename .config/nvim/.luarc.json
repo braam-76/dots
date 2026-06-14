@@ -1,8 +1,0 @@
-{
-  "Lua.diagnostics.globals": ["vim"],
-  "Lua.workspace.library": [
-    "$VIMRUNTIME",
-    "~/.config/nvim",
-    "~/.local/share/nvim/site/pack/core/opt/mini-in-one.nvim/lua"
-  ]
-}
