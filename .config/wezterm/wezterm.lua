@@ -5,7 +5,7 @@ local config = wezterm.config_builder()
 config.font_size = 14
 config.font = wezterm.font("Fantasque Sans Mono")
 
-config.color_scheme = 'Catppuccin Mocha'
+config.color_scheme = 'rose-pine'
 
 config.default_prog = { "fish" }
 

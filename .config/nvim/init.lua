@@ -54,8 +54,9 @@ vim.pack.add({
   "https://github.com/vague2k/vague.nvim",
   "https://github.com/miikanissi/modus-themes.nvim",
   "https://github.com/catppuccin/nvim",
+  "https://github.com/rose-pine/neovim"
 })
-vim.cmd.colorscheme("catppuccin-mocha")
+vim.cmd.colorscheme("rose-pine")
 
 -- Flash --
 vim.pack.add({ "https://github.com/folke/flash.nvim" })
