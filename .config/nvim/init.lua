@@ -14,9 +14,6 @@ vim.o.signcolumn = "yes"
 vim.o.winborder = "rounded"
 
 vim.o.expandtab = true
-vim.o.tabstop = 2
-vim.o.softtabstop = 2
-vim.o.shiftwidth = 2
 
 vim.o.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
@@ -48,15 +45,23 @@ vim.diagnostic.config({
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Better C-w" })
+vim.keymap.set("n", "<leader>v", "<cmd>vsplit<cr>", { desc = "split vertically" })
+vim.keymap.set("n", "<leader>h", "<cmd>split<cr>", { desc = "split horizontally" })
 
 -- Themes --
 vim.pack.add({
   "https://github.com/vague2k/vague.nvim",
   "https://github.com/miikanissi/modus-themes.nvim",
+  "https://github.com/oonamo/ef-themes.nvim",
   "https://github.com/catppuccin/nvim",
-  "https://github.com/rose-pine/neovim"
+  "https://github.com/rose-pine/neovim",
+  "https://github.com/rebelot/kanagawa.nvim",
+  "https://github.com/datsfilipe/vesper.nvim",
+  "https://github.com/phha/zenburn.nvim",
+  "https://github.com/drsooch/gruber-darker-vim",
 })
-vim.cmd.colorscheme("rose-pine")
+
+vim.cmd.colorscheme("GruberDarker")
 
 -- Flash --
 vim.pack.add({ "https://github.com/folke/flash.nvim" })
@@ -72,32 +77,6 @@ vim.keymap.set({ "c" }, "<c-s>", f.toggle, { desc = "Toggle Flash Search" })
 vim.pack.add({ "https://github.com/folke/which-key.nvim" })
 local wk = require("which-key")
 vim.keymap.set("n", "<leader>?", wk.show, { desc = "Buffer Local Keymaps (which-key)" })
-
--- Typst --
-vim.pack.add({ "https://github.com/chomosuke/typst-preview.nvim" })
-
-require("typst-preview").setup({
-  dependencies_bin = {
-    ["tinymist"] = "tinymist",
-    ["websocat"] = "websocat",
-  },
-})
-
-vim.lsp.config("tinymist", {
-  cmd = { "tinymist" },
-  filetypes = { "typst" },
-  settings = {
-    formatterMode = "typstyle",
-    exportPdf = "onType",
-    semanticTokens = "enable",
-  },
-  on_attach = function(_, bufnr)
-    vim.keymap.set("n", "<leader>pr", "<cmd>TypstPreview<CR>", {
-      buffer = bufnr,
-      desc = "Typst Preview",
-    })
-  end,
-})
 
 -- Markdown --
 vim.pack.add({ "https://github.com/iamcco/markdown-preview.nvim" })
@@ -115,34 +94,24 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.pack.add({
   "https://github.com/saghen/blink.cmp",
   "https://github.com/saghen/blink.lib",
-
-  "https://github.com/L3MON4D3/LuaSnip",
-  "https://github.com/rafamadriz/friendly-snippets",
-
   "https://github.com/neovim/nvim-lspconfig",
-
   "https://github.com/stevearc/conform.nvim",
-
   "https://github.com/folke/lazydev.nvim",
-  "https://github.com/DrKJeff16/wezterm-types"
+  "https://github.com/DrKJeff16/wezterm-types",
 })
-
-require("luasnip.loaders.from_vscode").lazy_load()
 
 require("lazydev").setup({
   library = {
     { path = "wezterm-types", mods = { "wezterm" } },
-  }
+  },
 })
 
 require("blink.cmp").setup({
   keymap = { preset = "super-tab" },
   appearance = { nerd_font_variant = "mono" },
-
   completion = {
     documentation = { auto_show = true, auto_show_delay_ms = 200 },
   },
-
   sources = {
     default = { "lazydev", "lsp", "path", "snippets", "buffer" },
     providers = {
@@ -153,29 +122,18 @@ require("blink.cmp").setup({
       },
     },
   },
-
-  snippets = { preset = "luasnip" },
   fuzzy = { implementation = "lua" },
   signature = { enabled = true },
 })
 
-vim.pack.add({ "https://github.com/mason-org/mason.nvim" })
-require("mason").setup()
-
 vim.lsp.enable({
-  "mesonlsp",
   "gopls",
-  "tinymist",
   "lua_ls",
   "basedpyright",
   "rust_analyzer",
   "clangd",
   "cmake",
-  "jdtls",
-  "racket_langserver",
 })
-
-vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
 
 -- Formatting --
 require("conform").setup({
@@ -186,6 +144,10 @@ require("conform").setup({
     javascript = { "prettierd", "prettier", stop_after_first = true },
   },
 })
+
+vim.keymap.set("n", "<leader>lf", function()
+  require("conform").format({ async = true, lsp_format = "fallback" })
+end, { desc = "Format buffer" })
 
 vim.pack.add({
   "https://github.com/nvim-mini/mini.nvim",
@@ -244,3 +206,5 @@ require("oil").setup({
   },
 })
 vim.keymap.set("n", "<leader>-", "<cmd>Oil<CR>", { desc = "Open netrw" })
+
+vim.pack.add({ "https://github.com/tpope/vim-abolish" })

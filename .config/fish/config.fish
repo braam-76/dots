@@ -1,5 +1,3 @@
-alias hx "helix "
-
 # direnv hook fish | source
 zoxide init fish | source
 starship init fish | source

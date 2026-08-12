@@ -1,6 +1,6 @@
 command = fish --login --interactive
 
-font-family = Fantasque Sans Mono
+font-family = FantasqueSansM Nerd Font
 font-size = 14
 
 # theme = Vague

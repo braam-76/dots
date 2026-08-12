@@ -16,6 +16,10 @@
       "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "ef-themes.nvim": {
+      "rev": "d9076b0e81cc1ec9f59ab6e65af9317763b7d2bb",
+      "src": "https://github.com/oonamo/ef-themes.nvim"
+    },
     "fidget.nvim": {
       "rev": "82404b196e73a00b1727a91903beef5ddc319d22",
       "src": "https://github.com/j-hui/fidget.nvim"
@@ -28,9 +32,21 @@
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
+    "gruber-darker-vim": {
+      "rev": "5f2cd5a9375873ce66d1b87ef00bac2bdff29356",
+      "src": "https://github.com/drsooch/gruber-darker-vim"
+    },
+    "gruber-darker.nvim": {
+      "rev": "9b68f84bfd6c1278fef2143802ca40c60f2471c0",
+      "src": "https://github.com/blazkowolf/gruber-darker.nvim"
+    },
     "indent-blankline.nvim": {
       "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
+    },
+    "kanagawa.nvim": {
+      "rev": "bb85e4bfc8d89b0e62c8fa53ccdd13d12e2f77b3",
+      "src": "https://github.com/rebelot/kanagawa.nvim"
     },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
@@ -96,6 +112,10 @@
       "rev": "1717b1ad657c94bec3fc2bdebb0c55452d9fe46d",
       "src": "https://github.com/datsfilipe/vesper.nvim"
     },
+    "vim-abolish": {
+      "rev": "dcbfe065297d31823561ba787f51056c147aa682",
+      "src": "https://github.com/tpope/vim-abolish"
+    },
     "wezterm-types": {
       "rev": "58c95e0d78e24b236b2eecaa2c29ae973478f79b",
       "src": "https://github.com/DrKJeff16/wezterm-types"
@@ -103,6 +123,10 @@
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "https://github.com/folke/which-key.nvim"
+    },
+    "zenburn.nvim": {
+      "rev": "f5ee12b30119499c7fa7f95719cd7c5aab9f9f29",
+      "src": "https://github.com/phha/zenburn.nvim"
     }
   }
 }
