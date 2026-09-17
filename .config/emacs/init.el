@@ -11,62 +11,8 @@
 (setq gc-cons-threshold (* 50 1000 1000))
 (setq load-prefer-newer t)
 
-;; Evil mode 
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-want-integration t
-        evil-want-keybinding nil
-        evil-want-C-u-scroll t
-        evil-want-C-i-jump nil
-        evil-respect-visual-line-mode t
-        evil-undo-system 'undo-redo)
-  :config
-  (evil-mode 1)
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)) 
-
-(use-package evil-collection
-  :ensure t
-  :after evil
-  :config
-  (evil-collection-init))
-
-(use-package evil-surround
-  :ensure t
-  :after evil
-  :config
-  (global-evil-surround-mode 1))
-
-(use-package evil-commentary
-  :ensure t
-  :after evil
-  :config
-  (evil-commentary-mode 1))
-
-(use-package general
-  :ensure t
-  :after evil
-  :config
-  (general-evil-setup)
-  (general-create-definer
-    leader
-    :states '(normal insert visual emacs)
-    :keymaps 'override
-    :prefix "SPC"
-    :global-prefix "C-SPC")
-  (setq dired-kill-when-opening-new-dired-buffer t)
-  (leader
-    "-"   '(dired-jump :which-key "open dired")
-    "SPC" '(find-file  :which-key "find file")))
-
 (use-package flymake
-  :ensure nil
-  :after general
-  :config
-  (general-def 'motion 'flymake-mode-map
-    "] d" 'flymake-goto-next-error
-    "[ d" 'flymake-goto-prev-error))
+  :ensure nil)
 
 ;; UI settings
 (menu-bar-mode     -1)
@@ -77,7 +23,7 @@
       ring-bell-function 'ignore)
 
 ;; Font settings
-(set-face-attribute 'default nil :font "FantasqueSansM Nerd Font-14")
+(set-face-attribute 'default nil :font "Fantasque Sans Mono-14")
 (setq-default line-spacing 0.12)
 
 ;; Editor behavior
@@ -105,23 +51,24 @@
 (use-package multiple-cursors
   :ensure t
   :config
-  (leader
-   "m"   '(:ignore t                  :which-key "[m]ark ...")
-   "m n" '(mc/mark-next-like-this     :which-key "[n]ext like this")
-   "m p" '(mc/mark-previous-like-this :which-key "[p]revious like this")
-   "m a" '(mc/mark-all-like-this      :which-key "[a]ll like this")))
+  (global-set-key (kbd "C-.") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-,") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C->") 'mc/mark-all-like-this)
+  )
 
-(use-package gruber-darker-theme
+(use-package zenburn-theme
   :ensure t
-  :config (load-theme 'gruber-darker t))
+  :config
+  (load-theme 'zenburn t))
 
 (use-package vterm :ensure t)
 
 (use-package projectile
+  :ensure t)
+
+(use-package astyle
   :ensure t
-  :config
-  (leader
-   "p" '(:keymap projectile-command-map :which-key "[p]rojectile")))
+  :when (executable-find "astyle"))
 
 (use-package eglot
   :ensure nil
@@ -130,20 +77,27 @@
   (c-ts-mode . eglot-ensure)
   (c++-mode . eglot-ensure)
   (c++-ts-mode . eglot-ensure)
+
+  (go-ts-mode . eglot-ensure)
+  (go-mod-ts-mode . eglot-ensure)
+  
   (java-mode . eglot-ensure)
   (js-ts-mode . eglot-ensure)
   (tsx-ts-mode . eglot-ensure)
   (typescript-mode . eglot-ensure)
   (cmake-ts-mode . eglot-ensure)
+  (python-mode . eglot-ensure)
+  (python-ts-mode . eglot-ensure)
+
+  :bind
+  ("C-c l f" . eglot-format)
+  
   :config
   (setq eglot-events-buffer-size 0
         eglot-autoshutdown t
         eglot-report-progress nil)
   (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
-  (leader
-    :states '(normal visual)
-    :keymaps 'eglot-mode-map
-    "l f" '(eglot-format :which-key "eglot-format file")))
+  )
 
 (use-package treesit-auto
   :ensure t
@@ -152,15 +106,16 @@
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
 
-(use-package yasnippet-snippets :ensure t)
+(use-package yasnippet-snippets
+  :ensure t
+  :config
+  (yas-minor-mode 1))
 (use-package which-key :ensure nil :hook (prog-mode . which-key-mode))
 
 (use-package magit
   :ensure t
-  :config
-  (leader
-   "g" '(:ignore t      :which-key "[g]it")
-   "g g" '(magit-status  :which-key "[g]it status")))
+  :bind
+  ("C-x g" . magit-status))
 
 (use-package corfu
   :ensure t
@@ -206,41 +161,26 @@
 
 (use-package consult
   :ensure t
+  :bind
+  (("C-x b"   . consult-buffer)
+   ("M-y"     . consult-yank-pop)
+   ("M-g g"   . consult-goto-line)
+   ("M-g M-g" . consult-goto-line)
+   ("M-g i"   . consult-imenu)
+   ("M-s l"   . consult-line)
+   ("M-s r"   . consult-ripgrep)
+   ("M-s g"   . consult-grep)
+   ("M-s d"   . consult-find)
+   ("M-s k"   . consult-keep-lines))
   :init
   (advice-add #'register-preview :override #'consult-register-window)
   (setq xref-show-xrefs-function       #'consult-xref
-        xref-show-definitions-function #'consult-xref)
-  (leader
-    "/" '(consult-line                  :which-key "find ...")
-    "c"   '(:ignore t                   :which-key "[c]onsult ...")
-    "c y" '(consult-yank-from-kill-ring :which-key "[y]ank")
-    "c i" '(consult-imenu               :which-key "[i]menu")
-    "c g" '(consult-ripgrep             :which-key "rip[g]rep")
-    "c m" '(consult-man                 :which-key "[m]an page")
-    "c f" '(consult-file                :which-key "find [f]ile") 
-  ))
+        xref-show-definitions-function #'consult-xref))
 
-;; Lisp modes
-(use-package paredit
-  :ensure t
-  :hook
-  (enable-paredit-mode . emacs-lisp-mode)
-  (enable-paredit-mode . eval-expression-minibuffer-setup)
-  (enable-paredit-mode . ielm-mode)
-  (enable-paredit-mode . lisp-mode)
-  (enable-paredit-mode . lisp-interaction-mode)
-  (enable-paredit-mode . scheme-mode))
-
-(setq treesit-language-source-alist
-      '((c3 "https://github.com/c3lang/tree-sitter-c3")))
-
-(use-package sly          :ensure t)
-(use-package geiser-guile :ensure t)
-(use-package clojure-mode :ensure t)
-(use-package cider        :ensure t)
-(use-package c3-ts-mode
-  :ensure (:host github :repo "c3lang/c3-ts-mode")
-  :mode ("\\.c3\\'" . c3-ts-mode))
+;; --- ai stuff ---
+(use-package agent-shell
+  :ensure t)
+;; --- ai stuff ---
 
 (provide 'init)
 ;;; init.el ends here
